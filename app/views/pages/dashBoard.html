@@ -1,0 +1,64 @@
+<div class="container" ng-controller="ChartsManager as chart">
+    <div class="row">
+        <div class="col-md-2">
+
+        </div>
+        <div class="col-md-10">
+
+                <uib-tabset>
+                    <uib-tab heading="数据模式">
+                        <table class="table">
+                            <caption>Optional table caption.</caption>
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Username</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>@fat</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Larry</td>
+                                <td>the Bird</td>
+                                <td>@twitter</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </uib-tab>
+                    <uib-tab heading="图表预览">
+
+                    </uib-tab>
+                    <uib-tab heading="调试使用">
+                        option:
+                        <pre>{{ chart.option | json }}</pre>
+                    </uib-tab>
+                </uib-tabset>
+            <hr />
+            <input type="text"  ng-model="chart.option" class="form-control">
+
+            <div echarts option="{{chart.option}}"></div>
+            <hr />
+
+            <input type="text"  ng-model="chart.textOption" class="form-control">
+            <div acharts option="{{chart.textOption}}"></div>
+
+
+        </div>
+
+
+    </div>
+</div>

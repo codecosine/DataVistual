@@ -1,0 +1,22 @@
+{
+  "name": "datavistual",
+  "description": "",
+  "main": "app.js",
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "angular": "^1.5.0",
+    "echarts": "^3.0.2",
+    "angular-bootstrap": "^1.1.2"
+  }
+}

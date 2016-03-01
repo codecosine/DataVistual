@@ -1,0 +1,29 @@
+<nav class="navbar navbar-default" ng-controller="navController as nav">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">{{nav.brandName}}</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="#">{{nav.linkName_1}}</a></li>
+            <li><a href="#" ui-sref="app.dataDispose">{{nav.linkName_2}}</a></li>
+            <li><a href="#" ui-sref="app.analyze">{{nav.linkName_3}}</a></li>
+            <li><a href="#" ui-sref="app.dashBoard">{{nav.linkName_4}}</a></li>
+            <li class="dropdown">
+                <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{nav.linkName_5}} <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">登录</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">注销</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <div ui-view="main"></div>
+</div>
+
+
+

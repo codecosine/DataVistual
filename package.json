@@ -1,0 +1,22 @@
+{
+  "name": "datavistual",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^1.5.2",
+    "ejs": "^2.4.1",
+    "express": "^4.13.4",
+    "mysql": "^2.10.2",
+    "node-mysql": "^0.4.2",
+    "xlsx": "^0.8.0"
+  },
+  "devDependencies": {
+    "should": "^8.2.2"
+  }
+}
