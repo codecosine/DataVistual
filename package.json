@@ -1,7 +1,7 @@
 {
   "name": "datavistual",
   "version": "1.0.0",
-  "description": "",
+  "description": "数字校园可视化项目",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,10 +10,19 @@
   "license": "ISC",
   "dependencies": {
     "async": "^1.5.2",
+    "body-parser": "^1.15.0",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.1",
     "ejs": "^2.4.1",
     "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "formidable": "^1.0.17",
+    "mongodb": "^2.1.7",
+    "mongoose": "^4.4.6",
     "mysql": "^2.10.2",
     "node-mysql": "^0.4.2",
+    "passport": "^0.3.2",
+    "underscore": "^1.8.3",
     "xlsx": "^0.8.0"
   },
   "devDependencies": {
