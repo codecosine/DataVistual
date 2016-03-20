@@ -12,6 +12,7 @@
     "async": "^1.5.2",
     "body-parser": "^1.15.0",
     "connect-flash": "^0.1.1",
+    "connect-mongo": "^1.1.0",
     "cookie-parser": "^1.4.1",
     "ejs": "^2.4.1",
     "express": "^4.13.4",
@@ -26,6 +27,10 @@
     "xlsx": "^0.8.0"
   },
   "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-concurrent": "^2.2.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-nodemon": "^0.4.1",
     "should": "^8.2.2"
   }
 }

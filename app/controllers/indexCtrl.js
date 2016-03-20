@@ -9,5 +9,5 @@ exports.home = function (req, res) {
     res.render('app');
 };
 exports.welcome = function (req, res) {
-    res.render('welcome', { title: '数字校园' });
+    res.render('welcome');
 };

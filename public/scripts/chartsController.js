@@ -1,21 +1,17 @@
 /**
- * Created by codec on 2016/2/2.
+ * Created by codecosine on 2016/2/2.
  */
 angular
     .module('app.chartModule',[
-    'cos.plugin',
+     'angular-echarts',
     'ui.bootstrap'
 ]);
 angular
     .module('app.chartModule')
     .controller('ChartsManager',ChartsManager);
-//ChartsManager.$inject = ['$scope'];
 function ChartsManager() {
     var vm = this;
-    vm.option = {
-        tooltip: {
-            show: true
-        },
+    vm.data = {
         legend: {
             data: ['销量']
         },
@@ -38,7 +34,14 @@ function ChartsManager() {
             }
         ]
     };
-    vm.textOption = JSON.stringify(vm.option);
-
+    vm.config = {
+        title: 'Line Chart',
+        subtitle: 'Subtitle',
+        debug: true,
+        showXAxis: true,
+        showYAxis: true,
+        showLegend: true,
+        stack: false
+    };
 }
 

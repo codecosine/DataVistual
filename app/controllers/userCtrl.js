@@ -4,57 +4,45 @@
 var mongooser = require('mongoose');
 var User = require('../models/user');
 
-// signup
-exports.showRegister = function(req, res) {
-    res.render('register', {
-        title: '注册页面'
-    })
-};
-
-exports.showLogin = function(req, res) {
-    res.render('login', {
-        title: '登录页面'
-    })
-};
 exports.login = function(req, res) {
     var _user = req.body.user;
     var username = _user.username;
     var password = _user.password;
-    console.log('test:login--'+name);
+    console.log('test:login--'+username);
     User.findOne({username: username}, function(err, user) {
         if (err) {
-            console.log(err)
+            console.log(err);
         }
-
         if (!user) {
-            return res.redirect('/register')
+            return res.redirect('/');
         }
-
         user.comparePassword(password, function(err, isMatch) {
             if (err) {
-                console.log(err)
+                console.log(err);
             }
-
             if (isMatch) {
-                req.session.user = user
+                req.session.user = user;
+                console.log('session info:');
+                console.log(req.session);
+
                 console.log('test:loginSuccess--');
-                return res.redirect('/')
+                return res.redirect('/home');
             }
             else {
-                return res.redirect('/register')
+                return res.redirect('/');
             }
         })
     })
 };
 exports.register = function(req, res) {
-    var _user = req.body.user;
+    var _user = req.body.signinUser;
     User.findOne({username: _user.username},  function(err, user) {
         if (err) {
             console.log(err)
         }
-
+        //用户已存在
         if (user) {
-            return res.redirect('/register')
+            return res.redirect('/')
         }
         else {
             user = new User(_user);
@@ -62,18 +50,19 @@ exports.register = function(req, res) {
                 if (err) {
                     console.log(err)
                 }
-
-                res.redirect('/login')
+                res.redirect('/')
             })
         }
     })
 };
-
-
 exports.loginRequired = function(req, res, next) {
+    console.log('loginRequired中间件');
+    console.log('user seesion info:');
+    console.log(req.session.user);
+
     var user = req.session.user;
     if (!user) {
-        return res.redirect('/login')
+        return res.redirect('/')
     }
     next();
 };

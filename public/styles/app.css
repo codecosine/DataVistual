@@ -2,9 +2,79 @@ body,button, input, select, textarea,h1 ,h2, h3, h4, h5, h6 { font-family: Micro
 form.tab-form-demo .tab-pane {
     margin: 20px 20px;
 }
+.modal-content {
+    width: 460px;
+}
+.logo{
+    display: block;
+    width: 274px;
+    height: 100px;
+    background: url(../img/logo.png) no-repeat;
+    margin: 0 auto 10px;
+}
+.login{
+    padding:0 27px;
+}
+.login .btn{
+    width: 100%;
+}
 .chartBox{
     height: 400px;
 }
 .list_margin{
     margin-bottom: 10px;
+}
+#banner{
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    height: 600px;
+}
+.top_blank_box{
+    width: 100%;
+    height: 60px;
+}
+/*switch按钮的css样式*/
+.switch * {
+    cursor: pointer;
+}
+.switch input {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+.switch span {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    background-color: #fff;
+    border: 1px solid #dddddd;
+    border-radius: 100px;
+    transition: all .5s;
+    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1) inset;
+    vertical-align: middle;
+}
+.switch input:checked + span::after {
+    left: 50%;
+    transition: all .2s;
+
+}
+.switch input:checked + span {
+    background-color: #5d9cec;
+    border-color: #5d9cec;
+    transition: all .5s;
+}
+.switch span::after {
+    content: "";
+    position: absolute;
+    background-color: #fff;
+    top: 0;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    border: 1px solid #ddd;
+    border-radius: 400px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    -webkit-transition: all .2s;
 }

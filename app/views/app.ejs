@@ -1,11 +1,7 @@
 <!doctype html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>广东工业大学数据可视化平台</title>
-	<link rel="stylesheet" href="/assets/bootstrap/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/styles/app.css">·
-</head>
+<html lang="zh-CN">
+<%- include includes/head %>
+
 <body>
 <div ui-view ng-app="app">
 </div>
@@ -20,7 +16,8 @@
 <script src="/scripts/chartsController.js"></script>
 <script src="/scripts/formsController.js"></script>
 <script src="/scripts/navController.js"></script>
-<script src="/scripts/plugin/cosEcharts.js"></script>
+<script src="/scripts/plugin/angular-echarts/directive.js"></script>
+<script src="/scripts/plugin/angular-echarts/util.js"></script>
 <script src="/scripts/plugin/angular-file-upload.js"></script>
 </body>
 </html>

@@ -7,18 +7,21 @@ angular.module('app.routes')
 
 routesConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 function routesConfig($stateProvider, $urlRouterProvider){
-    $urlRouterProvider.otherwise('/welcome');
+    $urlRouterProvider.otherwise('/app');
     $stateProvider
         .state('app', {
             url: '/app',
             views: {
                 '': {
                     templateUrl: 'views/includes/base.html'
+                },
+                'main@app':{
+                    templateUrl:'views/pages/home.html'
                 }
             }
         })
-        .state('app.home', {
-            url: '/home',
+        .state('app.profile', {
+            url: '/profile',
             views: {
                 'main@app':{
                     templateUrl:'views/pages/home.html'

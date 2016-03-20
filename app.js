@@ -5,20 +5,24 @@ var express = require('express')
     , routes = require('./app/routes/index')
     , bodyParser = require('body-parser')
     , session = require('express-session')
-    , moogoose = require('mongoose')
+    , mongoose = require('mongoose')
+    , MongoStore = require('connect-mongo')(session)
     , dburl = 'mongodb://localhost/datavistual'
     , server = require('http').createServer(app);
 
 
-moogoose.connect(dburl);
+mongoose.connect(dburl);
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/app/views');
 app.set('view engine', 'ejs');
 app.use(session({
     secret: 'keyboard cat',
-    resave: false,
+    resave: true,
     saveUninitialized: true,
-    cookie: { secure: true }
+    store: new MongoStore({
+        url: dburl,
+        collection: 'sessions'
+    })
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
