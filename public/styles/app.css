@@ -1,4 +1,5 @@
 body,button, input, select, textarea,h1 ,h2, h3, h4, h5, h6 { font-family: Microsoft YaHei,'宋体' , Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;}
+body { padding-top: 70px; }
 form.tab-form-demo .tab-pane {
     margin: 20px 20px;
 }
@@ -29,10 +30,6 @@ form.tab-form-demo .tab-pane {
     background-position: center;
     text-align: center;
     height: 600px;
-}
-.top_blank_box{
-    width: 100%;
-    height: 60px;
 }
 /*switch按钮的css样式*/
 .switch * {
@@ -77,4 +74,12 @@ form.tab-form-demo .tab-pane {
     border-radius: 400px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     -webkit-transition: all .2s;
+}
+/*
+侧边导航
+*/
+.sidebar-left{
+    position: absolute;
+    left: 50px;
+    width: 320px;
 }

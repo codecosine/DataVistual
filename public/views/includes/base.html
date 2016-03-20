@@ -9,29 +9,30 @@
         </div>
         <div class="collapse navbar-collapse" aria-expanded="true" id="navbar-brand">
             <ul class="nav navbar-nav navbar-left">
-                <li class="dropdown-full"><a href="#" class="dropdown-toggle" aria-expanded="false">{{nav.linkName_1}}</a></li>
-                <li class="dropdown-full"><a href="#" class="dropdown-toggle" aria-expanded="false" ui-sref="app.dataDispose">{{nav.linkName_2}}</a></li>
-                <li class="dropdown-full"><a href="#"  class="dropdown-toggle" aria-expanded="false" ui-sref="app.analyze">{{nav.linkName_3}}</a></li>
-                <li class="dropdown-full"><a href="#"  class="dropdown-toggle" aria-expanded="false" ui-sref="app.dashBoard">{{nav.linkName_4}}</a></li>
+                <li class="dropdown-full"><a href="#" class="dropdown-toggle" aria-expanded="false" ui-sref="app.profile">我的首页</a></li>
                 <li class="dropdown">
-                    <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{nav.linkName_5}} <span class="caret"></span></a>
+                    <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">操作数据 <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">登录</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">注销</a></li>
+                        <li class="dropdown-full"><a href="#" class="dropdown-toggle" aria-expanded="false" ui-sref="app.dataOrigin">导入数据源</a></li>
+                        <li class="dropdown-full"><a href="#" class="dropdown-toggle" aria-expanded="false" ui-sref="app.dataDispose">数据筛选</a></li>
+                        <li class="dropdown-full"><a href="#" class="dropdown-toggle" aria-expanded="false" ui-sref="app.analyze">数据分析</a></li>
                     </ul>
                 </li>
+                <li class="dropdown-full"><a href="#" class="dropdown-toggle" aria-expanded="false" ui-sref="app.dashBoard">操作台</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right" >
-                <li><button class="btn btn-default" data-toggle="modal" data-target="#login">登录</button></li>
-                <li><button class="btn btn-default" data-toggle="modal" data-target="#signin">注册</button></li>
+                <li class="dropdown">
+                    <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我的账户 <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">个人中心</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">退出登录</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
 </header>
-<div class="top_blank_box"></div>
 <div ui-view="main"></div>
 
 

@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="col-md-10">
-            <form name="form.formValidate" ng-submit="pro.submitForm()" novalidate="" class="form-validate form-horizontal">
+            <form name="form.formValidate" ng-submit="pro.connect()" novalidate="" class="form-validate form-horizontal">
             <fieldset>
                 <legend>数据源配置 <small>所选数据源:{{pro.origin}}</small></legend>
             </fieldset>
@@ -46,11 +46,12 @@
                 </fieldset>
             </div>
             <div ng-show="pro.show(2)">
+                <form>
                     <fieldset>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">主机地址</label>
                             <div class="col-sm-6">
-                                <input type="text" name="projectName" required="" ng-model="pro.host" class="form-control" />
+                                <input type="text" name="projectName" required="" ng-model="pro.config.host" class="form-control" />
                             </div>
                             <div class="col-sm-4">
                                 <small class="text-muted">*</small>
@@ -61,7 +62,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">端口号</label>
                             <div class="col-sm-6">
-                                <input type="text" name="projectName" required="" ng-model="pro.port" class="form-control" />
+                                <input type="text" name="projectName" required="" ng-model="pro.config.port" class="form-control" />
                             </div>
                             <div class="col-sm-4">
                                 <small class="text-muted">*</small>
@@ -72,7 +73,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">database</label>
                             <div class="col-sm-6">
-                                <input type="text" name="projectName" required="" ng-model="pro.database" class="form-control" />
+                                <input type="text" name="projectName" required="" ng-model="pro.config.database" class="form-control" />
                             </div>
                             <div class="col-sm-4">
                                 <small class="text-muted">*</small>
@@ -83,7 +84,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">用户名</label>
                             <div class="col-sm-6">
-                                <input type="text" name="projectName" required="" ng-model="pro.user" class="form-control" />
+                                <input type="text" name="projectName" required="" ng-model="pro.config.user" class="form-control" />
                             </div>
                             <div class="col-sm-4">
                                 <small class="text-muted">*</small>
@@ -94,16 +95,19 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">密码</label>
                             <div class="col-sm-6">
-                                <input type="password" name="projectName" required="" ng-model="pro.password" class="form-control" />
+                                <input type="password" name="projectName" required="" ng-model="pro.config.password" class="form-control" />
                             </div>
                             <div class="col-sm-4">
                                 <small class="text-muted">*</small>
                             </div>
                         </div>
                     </fieldset>
+                </form>
                 </div>
                 <fieldset>
                     <button class="btn btn-primary">下一步</button>
+                    <button class="btn btn-default" ng-click="pro.connect()">测试连接</button>
+
                 </fieldset>
             </form>
         </div>

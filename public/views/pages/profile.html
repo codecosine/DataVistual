@@ -1,0 +1,41 @@
+<div class="container">
+
+<div class="row">
+      <div class="col-lg-5">
+            <div class="user_info">
+                  <h3 class="ng-binding">codecosine</h3>
+                  <p class="text-muted ng-binding">846400886@qq.com</p>
+                  <!-- ngIf: !isMobile --><a href="#/account" class="btn btn_dark ng-scope" ng-if="!isMobile"><i class="icon iconfont"></i>修改资料</a><!-- end ngIf: !isMobile -->
+                  <!-- ngIf: !isMobile --><div class="user_capacity col-md-3 col-sm-4 col-xs-4 ng-scope" ng-if="!isMobile">
+            </div><!-- end ngIf: !isMobile -->
+            </div>
+      </div>
+
+      <div class="col-lg-3">
+            <!-- START widget-->
+            <div class="panel bg-info-light pt b0 widget">
+                  <div class="ph">
+                        <em class="icon-cloud-upload fa-lg pull-right"></em>
+                        <div class="h2 mt0">1700</div>
+                        <div class="text-uppercase">Uploads</div>
+                  </div>
+                  <div sparkline="" data-type="line" data-width="100%" data-height="75px" data-line-color="{{colorByName('info')}}" data-chart-range-min="0" data-fill-color="{{colorByName('info')}}" data-spot-color="{{colorByName('info')}}" data-min-spot-color="{{colorByName('info')}}"
+                       data-max-spot-color="{{colorByName('info')}}" data-highlight-spot-color="{{colorByName('info')}}" data-highlight-line-color="{{colorByName('info')}}" values="2,5,3,7,4,5" style="margin-bottom: -2px" data-resize="true"></div>
+            </div>
+      </div>
+
+</div>
+      <uib-tabset>
+            <uib-tab heading="所有项目">
+
+
+            </uib-tab>
+            <uib-tab>
+                  <uib-tab-heading>
+                        <i class="glyphicon glyphicon-folder-open"></i> 创建一个新项目
+                  </uib-tab-heading>
+                  select="alertMe()"
+            </uib-tab>
+
+      </uib-tabset>
+</div>

@@ -32,6 +32,11 @@ function projectController(FileUploader){
         vm.selectDb = function(index){
             vm.origin = connectOrigins[index];
         };
+        vm.config = {};
+        vm.connect = function(){
+         console.log(vm.config);
+
+        }
     }
 
 
