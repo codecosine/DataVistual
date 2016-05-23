@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "async": "^1.5.2",
+    "bcryptjs": "^2.3.0",
     "body-parser": "^1.15.0",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^1.1.0",
@@ -18,11 +19,16 @@
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "formidable": "^1.0.17",
+    "jsonwebtoken": "^5.7.0",
+    "jwt-simple": "^0.5.0",
     "mongodb": "^2.1.7",
     "mongoose": "^4.4.6",
+    "multer": "^1.1.0",
     "mysql": "^2.10.2",
     "node-mysql": "^0.4.2",
     "passport": "^0.3.2",
+    "passport-jwt": "^2.0.0",
+    "passport-local": "^1.0.0",
     "underscore": "^1.8.3",
     "xlsx": "^0.8.0"
   },
@@ -31,6 +37,10 @@
     "grunt-concurrent": "^2.2.1",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-nodemon": "^0.4.1",
-    "should": "^8.2.2"
+    "karma": "^0.13.22",
+    "karma-chrome-launcher": "^1.0.1",
+    "morgan": "^1.7.0",
+    "should": "^8.2.2",
+    "karma-jasmine": "^1.0.2"
   }
 }

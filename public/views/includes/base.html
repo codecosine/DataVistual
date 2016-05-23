@@ -1,4 +1,4 @@
-<header class="navbar no-border navbar-inverse navbar-fixed-top" id="nav" role="navigation" ng-controller="navController as nav">
+<header ng-hide="$state.current.name=='app.dashboard'" ng-class={'nav-welcome':$state.current.name=='welcome','nav-user':$state.current.name!='welcome'} class="navbar navbar-fixed-top" id="nav" role="navigation">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-brand" data-uicontrol="topnav_toggle">
@@ -7,33 +7,31 @@
             </button>
             <a href="/" class="navbar-brand"><img src="/img/logo_txt.png"></a>
         </div>
+
         <div class="collapse navbar-collapse" aria-expanded="true" id="navbar-brand">
-            <ul class="nav navbar-nav navbar-left">
-                <li class="dropdown-full"><a href="#" class="dropdown-toggle" aria-expanded="false" ui-sref="app.profile">我的首页</a></li>
-                <li class="dropdown">
-                    <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">操作数据 <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-full"><a href="#" class="dropdown-toggle" aria-expanded="false" ui-sref="app.dataOrigin">导入数据源</a></li>
-                        <li class="dropdown-full"><a href="#" class="dropdown-toggle" aria-expanded="false" ui-sref="app.dataDispose">数据筛选</a></li>
-                        <li class="dropdown-full"><a href="#" class="dropdown-toggle" aria-expanded="false" ui-sref="app.analyze">数据分析</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown-full"><a href="#" class="dropdown-toggle" aria-expanded="false" ui-sref="app.dashBoard">操作台</a></li>
+            <ul class="nav navbar-nav navbar-left" ng-show="isLogged()">
+                <li class="dropdown-full"><a href="#" class="dropdown-toggle" aria-expanded="false" ui-sref="app.dashboard">进入工作区</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right" >
-                <li class="dropdown">
-                    <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我的账户 <span class="caret"></span></a>
+                <li class="dropdown-full" ng-hide="isLogged()"><a href="#" ng-click="signin()" class="dropdown-toggle" aria-expanded="false">登录</a></li>
+                <li class="dropdown-full" ng-hide="isLogged()"><a href="#" ng-click="signup()" class="dropdown-toggle" aria-expanded="false">注册</a></li>
+                <li class="dropdown" ng-show="isLogged()">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{userinfo.username}} <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">个人中心</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">退出登录</a></li>
+                        <li><a href="#" ng-click="logout()">退出登录</a></li>
                     </ul>
                 </li>
             </ul>
         </div>
     </div>
 </header>
+
 <div ui-view="main"></div>
-
-
-
+<footer class="footer" ng-hide="$state.current.name=='app.dashboard'">
+    <div class="container">
+        <p>Code licensed under <a href="https://github.com/angular-ui/bootstrap/blob/master/LICENSE">MIT License</a>.</p>
+        <p>广东工业大学数字校园</p>
+    </div>
+</footer>

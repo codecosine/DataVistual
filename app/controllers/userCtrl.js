@@ -1,68 +1,52 @@
 /**
  * Created by Administrator on 2016/3/15 0015.
  */
-var mongooser = require('mongoose');
-var User = require('../models/user');
 
-exports.login = function(req, res) {
-    var _user = req.body.user;
-    var username = _user.username;
-    var password = _user.password;
-    console.log('test:login--'+username);
-    User.findOne({username: username}, function(err, user) {
-        if (err) {
-            console.log(err);
-        }
+var User = require('../models/user');
+var config = require("../config/database");
+var jwt = require('jsonwebtoken');
+
+exports.signin = function(req,res){
+    var _username = req.body.username;
+    var _password = req.body.password;
+    User.findOne({
+        username: _username
+    }, function(err, user) {
+        if (err) throw err;
         if (!user) {
             return res.redirect('/');
-        }
-        user.comparePassword(password, function(err, isMatch) {
-            if (err) {
-                console.log(err);
-            }
-            if (isMatch) {
-                req.session.user = user;
-                console.log('session info:');
-                console.log(req.session);
+        } else {
+            user.comparePassword(_password, function(err, isMatch) {
+                if (isMatch && !err) {
+                    var token = jwt.sign(user, config.secret,{ expiresIn: 3600 });
+                    res.json({success: true, username:_username,token:"JWT "+ token});
 
-                console.log('test:loginSuccess--');
-                return res.redirect('/home');
-            }
-            else {
-                return res.redirect('/');
-            }
-        })
-    })
-};
-exports.register = function(req, res) {
-    var _user = req.body.signinUser;
-    User.findOne({username: _user.username},  function(err, user) {
-        if (err) {
-            console.log(err)
-        }
-        //用户已存在
-        if (user) {
-            return res.redirect('/')
-        }
-        else {
-            user = new User(_user);
-            user.save(function(err, user) {
-                if (err) {
-                    console.log(err)
+                } else {
+                    res.send({success: false, msg: 'Authentication failed. Wrong password.'});
                 }
-                res.redirect('/')
+            });
+        }
+    });
+};
+exports.signup = function(req,res){
+    var _username = req.body.username;
+    var _password = req.body.password;
+    var _user = {
+        username : _username,
+        password : _password
+    };
+    User.findOne({username: _username
+    },  function(err, user) {
+        if (err) {throw err; }
+        if (user) {
+            res.json({success: false, msg: '用户名已经存在，注册失败.'});
+        } else {
+            user = new User(_user);
+            user.save(function(err) {
+                if (err) {   console.log(err)   }
+                res.json({success: true, msg: '注册成功.'});
             })
         }
     })
 };
-exports.loginRequired = function(req, res, next) {
-    console.log('loginRequired中间件');
-    console.log('user seesion info:');
-    console.log(req.session.user);
 
-    var user = req.session.user;
-    if (!user) {
-        return res.redirect('/')
-    }
-    next();
-};

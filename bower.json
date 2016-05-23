@@ -17,6 +17,8 @@
     "bootstrap": "^3.3.6",
     "angular": "^1.5.0",
     "echarts": "^3.0.2",
-    "angular-bootstrap": "^1.1.2"
+    "angular-bootstrap": "^1.1.2",
+    "handsontable": "^0.24.1",
+    "angularjs-slider": "^2.13.0"
   }
 }

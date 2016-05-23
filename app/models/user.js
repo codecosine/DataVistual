@@ -1,8 +1,56 @@
 /**
- * Created by Administrator on 2016/3/15 0015.
+ * Created by Administrator on 2016/3/22 0022.
  */
 var mongoose = require('mongoose');
-var UserSchema = require('../schemas/user');
-var User = mongoose.model('User',UserSchema);
+var Schema = mongoose.Schema;
+var bcrypt = require('bcryptjs');
 
-module.exports = User;
+// set up a mongoose model
+var UserSchema = new Schema({
+    username: {
+        type: String,
+        unique: true,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    projects:[{
+        name:String,
+        date:Date,
+        chartType:String,
+        chartOption:String
+    }]
+});
+
+UserSchema.pre('save', function (next) {
+    var user = this;
+    if (this.isModified('password') || this.isNew) {
+        bcrypt.genSalt(10, function (err, salt) {
+            if (err) {
+                return next(err);
+            }
+            bcrypt.hash(user.password, salt, function (err, hash) {
+                if (err) {
+                    return next(err);
+                }
+                user.password = hash;
+                next();
+            });
+        });
+    } else {
+        return next();
+    }
+});
+
+UserSchema.methods.comparePassword = function (passw, cb) {
+    bcrypt.compare(passw, this.password, function (err, isMatch) {
+        if (err) {
+            return cb(err);
+        }
+        cb(null, isMatch);
+    });
+};
+
+module.exports = mongoose.model('User', UserSchema);

@@ -1,0 +1,27 @@
+
+<div class="modal-body">
+    <div class="login">
+        <div class="logo"></div>
+        <form ng-submit="auth.signIn(auth.credentials)" >
+            <div class="form-group">
+                <input type="text" ng-model="auth.credentials.username" class="form-control" placeholder="用户名" required>
+            </div>
+            <div class="form-group">
+                <input type="password" ng-model="auth.credentials.password" class="form-control"  placeholder="密码" required>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <div class="pull-right">
+                        <a href="#" id="forgot_password"> 忘记密码？</a>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-danger enter-responsive">登录</button>
+            </div>
+            <div class="form-group text-center">
+                还没有账户？<a href="#" ng-click="auth.changeToSignUp()" aria-controls="profile" role="tab" data-toggle="tab">点击注册</a>
+            </div>
+        </form>
+    </div>
+</div>

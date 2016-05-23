@@ -1,0 +1,151 @@
+<div class="container" ng-controller="ProjectController as project">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form class="form-horizontal">
+                        <fieldset>
+                            <legend>基本设置</legend>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">项目名称</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control form-control-rounded" />
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>数据源配置</legend>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">数据源</label>
+                                <div class="col-sm-2">
+                                    <a ng-click="project.select(0)" class="thumbnail">
+                                        <img src="img/dbSelect_mysql.png" alt="Mysql">
+                                    </a>
+                                </div>
+                                 <div class="col-sm-2">
+                                        <a ng-click="project.select(1)" class="thumbnail">
+                                            <img src="img/dbSelect_excel.png" alt="excel">
+                                        </a>
+                                 </div>
+                                <div class="col-sm-2">
+                                        <a ng-click="project.select(2)" class="thumbnail">
+                                            <img src="img/dbSelect_txt.png" alt="txt">
+                                        </a>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset ng-show="project.show(0)">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">主机地址</label>
+                                <div class="col-sm-8">
+                                    <input type="text" placeholder="0.0.0.0" class="form-control form-control-rounded" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">端口号</label>
+                                <div class="col-sm-8">
+                                    <input type="text" placeholder="3306" class="form-control form-control-rounded" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Database</label>
+                                <div class="col-sm-8">
+                                    <input type="text" placeholder="test" class="form-control form-control-rounded" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">用户名</label>
+                                <div class="col-sm-8">
+                                    <input type="text" placeholder="root" class="form-control form-control-rounded" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">密码</label>
+                                <div class="col-sm-8">
+                                    <input type="password" class="form-control form-control-rounded" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">测试连接</label>
+                                <div class="col-sm-8">
+                                    <button ng-click="projeect.mysqlTest()" class="btn btn-default">连接</button>
+                                    <span class="help-block alert-danger">数据库连接测试失败.</span>
+                                    <span class="help-block alert-info">数据库连接测试成功.</span>
+
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset ng-show="project.show(1)">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Excel 文件上传</label>
+                                <p>支持格式:只会解析第一个工作簿,多个工作簿请分解成多个文件上传,检查格式,首行不要留白</p>
+                                <a href="#">查看示例</a>
+                                <ul>
+                                    <li>Excel 2007+ XML Formats (XLSX/XLSM)</li>
+                                    <li>Excel 2007+ Binary Format (XLSB)</li>
+                                    <li>Excel 2003-2004 XML Format (XML "SpreadsheetML")</li>
+                                    <li>Excel 97-2004 (XLS BIFF8)</li>
+                                    <li>Excel 5.0/95 (XLS BIFF5)</li>
+                                    <li>OpenDocument Spreadsheet (ODS)</li>
+                                </ul>
+                                <div class="col-md-9" style="margin-bottom: 40px">
+                                    <input type="file" nv-file-select uploader="project.xlsxUploader" options="project.UploadItem"/><br/>
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th width="40%">文件名</th>
+                                            <th>大小</th>
+                                            <th width="25%">进度</th>
+                                            <th width="10%">状态</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="item in project.xlsxUploader.queue" class="ng-scope">
+                                            <td><strong class="ng-binding" ng-bind="item.file.name"></strong></td>
+                                            <td nowrap="" class="ng-binding" ng-bind="item.file.size"></td>
+                                            <td>
+                                                <div class="progress" style="margin-bottom: 0;">
+                                                    <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }" style="width: 0%;"></div>
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                <span ng-show="item.isSuccess" ><i class="glyphicon glyphicon-ok"></i></span>
+                                                <span ng-show="item.isError" ><i class="glyphicon glyphicon-remove"></i></span>
+                                            </td>
+                                            <td nowrap="">
+                                                <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                                    <span class="glyphicon glyphicon-upload"></span> 上传
+                                                </button>
+                                                <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                                                    <span class="glyphicon glyphicon-trash"></span> 删除
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset ng-show="project.show(2)">
+                            <div class="form-group">
+                                文本上传控制
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend></legend>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"></label>
+                                <div class="col-sm-8">
+                                    <button class="btn btn-primary" ng-click="project.saveSetting()">保存并进入分析台</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
