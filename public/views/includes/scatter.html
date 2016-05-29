@@ -1,0 +1,65 @@
+<fieldset>
+    <h4>散点图说明</h4>
+    <ul>
+        <li>散点图也叫 X-Y 图，它将所有的数据以点的形式展现在笛卡尔坐标系上，以显示变量之间的相互影响程度，点的位置由变量的数值决定。</>
+        <li>多维度扩展:由散点圆圈的大小或者着色的颜色深浅可以扩展更多的维度</li>
+        <li>数据格式:[x轴数据值,y轴数据值,...更多维度]</li>
+    </ul>
+    <div class="form-group">
+        <div class="col-sm-4">
+            <span class="help-block">还未配置数据源？<a href="" ng-click="dash.active = 5">前去配置</a></span>
+        </div>
+        <div class="col-sm-2">
+            <button class="btn btn-info" ng-click="create.importOrigin()"><i class="glyphicon glyphicon-download"></i> 导入数据</button>
+        </div>
+        <div class="col-sm-2">
+            <button class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> 查看数据</button>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-12 chartTypeList" >
+            <div ng-repeat="type in create.dataTypeList">
+                <button class="btn btn-default col-sm-2" ng-bind="type.data"></button>
+            </div>
+        </div>
+    </div>
+</fieldset>
+<fieldset>
+    <h4>新建数据系列</h4>
+    <span class="help-block">数据系列:图表中想要进行对比的数据分类系列，例如不同的城市，不同的性别</span>
+    <div class="form-group">
+            <label class="col-sm-2 control-label">系列名称</label>
+            <div class="col-sm-8">
+                <input type="text" placeholder="系列名称" ng-model="create.typeForm.typeName" class="form-control form-control-rounded" />
+            </div>
+    </div>
+    <div class="form-group">
+            <label class="col-sm-2 control-label">数据格式</label>
+            <div class="col-sm-8">
+                <ui-select multiple ng-model="create.typeForm.selectTypes" theme="bootstrap" close-on-select="true" >
+                    <ui-select-match placeholder="选择本类别的数据......">{{$item.data}}</ui-select-match>
+                    <ui-select-choices repeat="type in create.dataTypeList">
+                        <span ng-bind="type.data"></span>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+
+    </div>
+    <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+            <div class="col-sm-8">
+                <button class="btn btn-primary" ng-click="create.createType(create.typeForm)"><i class="glyphicon glyphicon-check"></i> 添加系列</button>
+                <span class="alert-success">添加成功~</span>
+            </div>
+    </div>
+</fieldset>
+<fieldset>
+    <h4>多维度扩展</h4>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">方式</label>
+        <div class="col-sm-8">
+        </div>
+    </div>
+
+</fieldset>
+

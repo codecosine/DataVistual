@@ -2,11 +2,10 @@
     <header class="navbar-fixed-top nav-dashboard" id="nav" role="navigation">
         <span ng-click="dash.pageElement.menuShow = true" class="btn btn-success menubtn"></span>
         <div class="container">
-            <span class="text-center">项目名称</span>
-            <span style="float: right">用户名:______</span>
+            <span style="float: right"><a href="/" class="navbar-brand">可视化教学平台</span>
         </div>
     </header>
-    <div class="container">
+    <div class="container" ng-hide="dash.pageElement.projectShow">
         <div class="chartToolbar">
             <uib-tabset>
                 <uib-tab index="0" heading="基本">
@@ -77,26 +76,16 @@
             </uib-tabset>
         </div>
         <div style="height: 155px"></div>
-         <div>
-        <div style="height:600px;" ng-style="{'width': dash.chartWidth+'px'}">
+        <div ng-hide="dash.pageElement.projectShow" style="height:600px;" ng-style="{'width': dash.chartWidth+'px'}">
             <echarts chartid="cosine"></echarts>
         </div>
     </div>
 
-        <div class="row" ng-show="dash.pageElement.projectShow" style="position:absolute;z-index: 5">
-            <legand>还没有项目？马上创建~</legand>
-            <div class="col-xs-6 col-md-3">
-                <a href="#" class="thumbnail">
-                    <img data-src="holder.js/100%x180" alt="项目" style="height: 180px; width: 100%; display: block;" src="img/gallery/scatter-painter-choice.png" data-holder-rendered="true">
-                </a>
-            </div>
-            <div class="col-xs-6 col-md-3">
-                <a class="thumbnail" ui-sref="app.project">
-                    <i class="glyphicon glyphicon-plus">new</i>
-                </a>
-            </div>
-        </div>
-    </div>
+    <div class="container" ng-show="dash.pageElement.projectShow" style="position:absolute;z-index: 5">
+            <a class="col-lg-2 thumbnail btn-default" ng-click="dash.start()">
+                <i class="glyphicon glyphicon-pencil"></i>创建图表
+            </a>
+       </div>
     <div class="main-menu" ng-show="dash.pageElement.menuShow">
         <ul class="tab-bar">
             <li class="close-menu tab-item" ng-click="dash.pageElement.menuShow = false"><i class="glyphicon glyphicon-menu-left"></i></li>
@@ -105,10 +94,9 @@
             <li class="tab-item" ng-class="{'active': dash.active == 3}" ng-click="dash.active = 3"><span>打开/保存</span></li>
             <li></li>
             <li class="tab-item" ng-class="{'active': dash.active == 4}" ng-click="dash.active = 4"><span>图表创建</span></li>
-            <li class="tab-item" ng-class="{'active': dash.active == 5}" ng-click="dash.active = 5"><span>源配置</span></li>
-            <li class="tab-item" ng-class="{'active': dash.active == 6}" ng-click="dash.active = 6"><span>数据处理</span></li>
+            <li class="tab-item" ng-class="{'active': dash.active == 5}" ng-click="dash.active = 5"><span>数据源</span></li>
             <li></li>
-            <li class="tab-item" ng-class="{'active': dash.active == 7}" ng-click="dash.active = 7"><span>帮助</span></li>
+            <li class="tab-item" ng-class="{'active': dash.active == 6}" ng-click="dash.active = 6"><span>帮助</span></li>
         </ul>
         <div class="tab-body">
             <div class="tab-panel" ng-show="dash.showpanel(1)">
@@ -203,339 +191,9 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-panel" ng-show="dash.showpanel(6)">
-                <div ng-show="chart.pageElement.excelShow">
-                    <hot-table col-headers="true" datarows="chart.typeDatas">
-                        <hot-column ng-repeat="column in chart.typeNames" data="{{column.data}}" title="column.title" read-only="column.readOnly"></hot-column>
-                    </hot-table>
-                </div>
-                <fieldset>
-                    <i class="glyphicon glyphicon-pencil"></i>
-                    数据设置
-                    <div class="form-group">
-                        <button class="btn btn-default col-sm-5" ng-click="chart.updateData()">
-                            <i class="glyphicon glyphicon-download"></i>
-                            导入数据
-                        </button>
-                        <button class="btn btn-default col-sm-5 col-sm-offset-1" ui-sref="app.set">
-                            <i class="glyphicon glyphicon-cog"></i>
-                            数据源配置
-                        </button>
-                    </div>
-                </fieldset>
-                <fieldset>
-                    <div class="form-group">
-                        <button class="btn btn-primary col-sm-11"  ng-show="!chart.pageElement.excelShow" ng-click="chart.pageElement.excelShow = true">
-                            <i class="glyphicon glyphicon-pencil"></i>
-                            用Excel编辑数据
-                        </button>
-                        <button class="btn btn-success col-sm-5" ng-show="chart.pageElement.excelShow" ng-click="chart.pageElement.excelShow = false">
-                            <i class="glyphicon glyphicon-ok"></i>
-                            确认修改</button>
-                        </button>
-                        <button class="btn btn-danger col-sm-5 col-sm-offset-1" ng-show="chart.pageElement.excelShow" ng-click="chart.pageElement.excelShow = false">
-                            <i class="glyphicon glyphicon-remove"></i>
-                            取消
-                        </button>
-                    </div>
-                </fieldset>
-            </div>
-            <div class="tab-panel" ng-show="dash.showpanel(5)">
-                <div ng-controller="DataBaseSet as set">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <form class="form-horizontal">
-                                <fieldset>
-                                    <legend>数据源配置</legend>
-                                </fieldset>
-                                <fieldset>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">数据源</label>
-                                        <div class="col-sm-2">
-                                            <a ng-click="set.select(0)" class="thumbnail">
-                                                <img src="img/dbSelect_mysql.png" alt="Mysql">
-                                            </a>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <a ng-click="set.select(1)" class="thumbnail">
-                                                <img src="img/dbSelect_excel.png" alt="excel">
-                                            </a>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <a ng-click="set.select(2)" class="thumbnail">
-                                                <img src="img/dbSelect_json.png" alt="json">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                                <fieldset ng-show="set.show(0)">
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">主机地址</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" ng-model="set.mysqlconfig.host" placeholder="0.0.0.0" class="form-control form-control-rounded" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">端口号</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" ng-model="set.mysqlconfig.port" placeholder="3306" class="form-control form-control-rounded" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">数据库名</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" ng-model="set.mysqlSetting.database" placeholder="test" class="form-control form-control-rounded" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">用户名</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" ng-model="set.mysqlSetting.user" placeholder="root" class="form-control form-control-rounded" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">密码</label>
-                                        <div class="col-sm-8">
-                                            <input type="password" ng-model="set.mysqlSetting.password" class="form-control form-control-rounded" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">测试连接</label>
-                                        <div class="col-sm-8">
-                                            <button ng-click="set.mysqlTest(set.mysqlSetting)" class="btn btn-default">测试连接</button>
-                                            <span class="help-block">注意:mysql源需要测试连接成功后才能正确保存添加</span>
-                                            <span ng-show="set.pageElement.mysqlTestFail" class="help-block alert-danger">数据库连接测试失败.</span>
-                                            <span ng-show="set.pageElement.mysqlTestSuccess"class="help-block alert-info">数据库连接测试成功.</span>
-
-                                        </div>
-                                    </div>
-                                </fieldset>
-                                <fieldset ng-show="set.show(1)">
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Excel 文件上传</label>
-                                        <div class="col-sm-9">
-                                            <label>备注:只解析第一个工作簿,首行请不要留白</label>
-                                            <a href="#">查看示例</a>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-md-9 col-sm-offset-2" style="margin-bottom: 40px">
-                                            <input type="file" nv-file-select uploader="set.xlsxUploader" options="set.UploadItem"/><br/>
-                                            <table class="table">
-                                                <thead>
-                                                <tr>
-                                                    <th width="40%">文件名</th>
-                                                    <th>大小</th>
-                                                    <th width="25%">进度</th>
-                                                    <th width="10%">状态</th>
-                                                    <th>操作</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr ng-repeat="item in set.xlsxUploader.queue" class="ng-scope">
-                                                    <td><strong class="ng-binding" ng-bind="item.file.name"></strong></td>
-                                                    <td nowrap="" class="ng-binding" ng-bind="item.file.size"></td>
-                                                    <td>
-                                                        <div class="progress" style="margin-bottom: 0;">
-                                                            <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }" style="width: 0%;"></div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <span ng-show="item.isSuccess" ><i class="glyphicon glyphicon-ok"></i></span>
-                                                        <span ng-show="item.isError" ><i class="glyphicon glyphicon-remove"></i></span>
-                                                    </td>
-                                                    <td nowrap="">
-                                                        <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
-                                                            <span class="glyphicon glyphicon-upload"></span> 上传
-                                                        </button>
-                                                        <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
-                                                            <span class="glyphicon glyphicon-trash"></span> 删除
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                                <fieldset ng-show="set.show(2)">
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">JSON文本导入</label>
-                                        <div class="col-sm-9">
-                                            <label>支持JSON格式:对象以及数组对象格式</label>
-                                            <a href="#">查看示例</a>
-                                        </div>
-                                        <div class="form-group">
-                                             <div class="col-md-9 col-sm-offset-2">
-                                                 <textarea style="height: 300px" ng-model="set.jsonArea"></textarea>
-                                             </div>
-                                            <div class="col-sm-8">
-                                                <button ng-click="set.jsonSure()" class="btn btn-default">校验并格式化JSON</button>
-                                                <span class="help-block">注意:JSON源需要校验并格式化JSON成功后才能正确保存添加</span>
-                                                <span ng-show="set.pageElement.jsonTestFail" class="help-block alert-danger">校验并格式化失败.</span>
-                                                <span ng-show="set.pageElement.jsonTestSuccess"class="help-block alert-info">校验并格式化成功.</span>
-
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </fieldset>
-                                <fieldset>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label"></label>
-                                        <div class="col-sm-8">
-                                            <button class="btn btn-lg btn-default" ng-click="set.saveSetting(set.origin)">保存设置</button>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="tab-panel" ng-show="dash.showpanel(4)">
-                <div ng-controller="ChartsCreate as create" >
-                    <div class="row">
-                        <div class="col-md-12">
-                            <form class="form-horizontal">
-                                <fieldset>
-                                    <legend>图表创建</legend>
-                                </fieldset>
-
-                                <fieldset>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">名字</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" placeholder="起一个喜欢的名字吧" class="form-control form-control-rounded" />
-                                        </div>
-                                    </div>
-                                    <uib-tabset type="pills">
-                                        <uib-tab heading="Default Size" classes="btn-sm">
-                                            <div class="form-group">
-                                                <div class="col-sm-2">
-                                                    <a ng-click="set.select(0)" class="thumbnail">
-                                                        <img src="img/dbSelect_mysql.png" alt="Mysql">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </uib-tab>
-                                        <uib-tab heading="Small Button" classes="btn-sm">Tab 2 content</uib-tab>
-                                    </uib-tabset>
-
-
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">数据获取</label>
-                                        <div class="col-sm-2">
-                                            <button class="btn btn-info" ng-click="create.importOrigin()"><i class="glyphicon glyphicon-download"></i>从数据源导入数据</button>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <span class="help-block">还未配置数据源？<a href="" ng-click="dash.active = 5">前去配置</a></span>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                                </fieldset>
-                                <h4>已导入的数据</h4>
-                                <fieldset>
-                                    <div class="form-group">
-                                        <div class="col-sm-12 chartTypeList" >
-                                            <div ng-repeat="type in create.dataTypeList">
-                                                <button class="btn btn-primary col-sm-2" ng-bind="type.data"></button>
-                                            </div>
-                                            <button class="btn btn-primary col-sm-2">编辑数据...</button>
-
-                                        </div>
-
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-6">
-                                            <span class="help-block">进一步编辑筛选或者分析数据？<a href="" ng-click="dash.active = 6">点击</a></span>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                                <h4>新建数据系列</h4>
-                                <div class="chartDataGroup">
-
-                                    <fieldset>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">图表类型</label>
-                                            <div class="col-sm-8">
-                                                <ui-select ng-model="create.typeValue">
-                                                    <ui-select-match>
-                                                        <span ng-bind="$select.selected.name"></span>
-                                                    </ui-select-match>
-                                                    <ui-select-choices id="chartListBox" repeat="item in (create.typeArray | filter: $select.search) track by item.id">
-                                                        <div class="chartList">
-                                                            <span ng-bind="item.name"></span>
-                                                            <img ng-src="{{item.imageUrl}}">
-                                                            <li role="separator" class="divider"></li>
-                                                        </div>
-                                                    </ui-select-choices>
-                                                </ui-select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">系列名称</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" placeholder="系列名称" ng-model="create.typeForm.typeName" class="form-control form-control-rounded" />
-                                            </div>
-                                        </div>
-                                        <!--<div class="form-group">
-                                            <label class="col-sm-2 control-label">数据维度</label>
-                                            <div class="col-sm-8">
-                                                <ui-select ng-model="create.typeForm.AxisValue">
-                                                    <ui-select-match>
-                                                        <span ng-bind="$select.selected.name"></span>
-                                                    </ui-select-match>
-                                                    <ui-select-choices repeat="item in create.AxisArray">
-                                                        <span ng-bind="item.name"></span>
-                                                    </ui-select-choices>
-                                                </ui-select>
-                                            </div>
-                                        </div>-->
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">数据维度</label>
-                                            <div class="col-sm-8">
-                                                <ui-select multiple ng-model="create.typeForm.selectTypes" theme="bootstrap" close-on-select="false" >
-                                                    <ui-select-match placeholder="选择本类别的数据......">{{$item.data}}</ui-select-match>
-                                                    <ui-select-choices repeat="type in create.dataTypeList">
-                                                        <span ng-bind="type.data"></span>
-                                                    </ui-select-choices>
-
-                                                </ui-select>
-                                            </div>
-
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label"></label>
-                                            <div class="col-sm-8">
-                                                <button class="btn btn-default" ng-click="create.createType(create.typeForm)">+新建</button>
-                                            </div>
-                                        </div>
-
-                                    </fieldset>
-
-                                </div>
-
-                                <fieldset>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label"></label>
-                                        <div class="col-sm-8">
-                                            <button class="btn btn-default" ng-click="create.createChart()">生成图表</button>
-                                        </div>
-                                    </div>
-                                </fieldset>
-
-                            </form>
-
-                        </div>
-                    </div>
-
-
-                </div>
-
-            </div>
-
+            <div class="tab-panel" ng-show="dash.showpanel(6)"> 帮助 </div>
+            <div class="tab-panel" ng-include="'views/panels/ChartsCreate.html'" ng-show="dash.showpanel(4)"></div>
+            <div class="tab-panel" ng-include="'views/panels/DataBaseSet.html'" ng-show="dash.showpanel(5)"></div>
         </div>
     </div>
 </div>

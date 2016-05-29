@@ -1,0 +1,149 @@
+<div ng-controller="DataBaseSet as set">
+    <div class="row">
+        <div class="col-md-12">
+            <form class="form-horizontal">
+                <fieldset>
+                    <legend>数据源配置</legend>
+                </fieldset>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">数据源</label>
+                        <div class="col-sm-2">
+                            <a ng-click="set.select(0)" class="thumbnail">
+                                <img src="img/dbSelect_mysql.png" alt="Mysql">
+                            </a>
+                        </div>
+                        <div class="col-sm-2">
+                            <a ng-click="set.select(1)" class="thumbnail">
+                                <img src="img/dbSelect_excel.png" alt="excel">
+                            </a>
+                        </div>
+                        <div class="col-sm-2">
+                            <a ng-click="set.select(2)" class="thumbnail">
+                                <img src="img/dbSelect_json.png" alt="json">
+                            </a>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset ng-show="set.show(0)">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">主机地址</label>
+                        <div class="col-sm-8">
+                            <input type="text" ng-model="set.mysqlconfig.host" placeholder="0.0.0.0" class="form-control form-control-rounded" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">端口号</label>
+                        <div class="col-sm-8">
+                            <input type="text" ng-model="set.mysqlconfig.port" placeholder="3306" class="form-control form-control-rounded" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">数据库名</label>
+                        <div class="col-sm-8">
+                            <input type="text" ng-model="set.mysqlSetting.database" placeholder="test" class="form-control form-control-rounded" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">用户名</label>
+                        <div class="col-sm-8">
+                            <input type="text" ng-model="set.mysqlSetting.user" placeholder="root" class="form-control form-control-rounded" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">密码</label>
+                        <div class="col-sm-8">
+                            <input type="password" ng-model="set.mysqlSetting.password" class="form-control form-control-rounded" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">测试连接</label>
+                        <div class="col-sm-8">
+                            <button ng-click="set.mysqlTest(set.mysqlSetting)" class="btn btn-default">测试连接</button>
+                            <span class="help-block">注意:mysql源需要测试连接成功后才能正确保存添加</span>
+                            <span ng-show="set.pageElement.mysqlTestFail" class="help-block alert-danger">数据库连接测试失败.</span>
+                            <span ng-show="set.pageElement.mysqlTestSuccess"class="help-block alert-info">数据库连接测试成功.</span>
+
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset ng-show="set.show(1)">
+                        <h4>Excel上传</h4>
+                        <span class="help-block">注意:只解析第一个工作簿,首行请不要留白<a href="">查看示例</a></span>
+                    <div class="form-group">
+                        <div class="col-md-9 col-sm-offset-2" style="margin-bottom: 40px">
+                            <input type="file" nv-file-select uploader="set.xlsxUploader" options="set.UploadItem"/><br/>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th width="40%">文件名</th>
+                                    <th>大小</th>
+                                    <th width="25%">进度</th>
+                                    <th width="10%">状态</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in set.xlsxUploader.queue" class="ng-scope">
+                                    <td><strong class="ng-binding" ng-bind="item.file.name"></strong></td>
+                                    <td nowrap="" class="ng-binding" ng-bind="item.file.size"></td>
+                                    <td>
+                                        <div class="progress" style="margin-bottom: 0;">
+                                            <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }" style="width: 0%;"></div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <span ng-show="item.isSuccess" ><i class="glyphicon glyphicon-ok"></i></span>
+                                        <span ng-show="item.isError" ><i class="glyphicon glyphicon-remove"></i></span>
+                                    </td>
+                                    <td nowrap="">
+                                        <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                            <span class="glyphicon glyphicon-upload"></span> 上传
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                                            <span class="glyphicon glyphicon-trash"></span> 删除
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset ng-show="set.show(2)">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">JSON文本导入</label>
+                        <div class="col-sm-9">
+                            <label>支持JSON格式:对象以及数组对象格式</label>
+                            <a href="#">查看示例</a>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-9 col-sm-offset-2">
+                                <textarea style="height: 300px" ng-model="set.jsonArea"></textarea>
+                            </div>
+                            <div class="col-sm-8">
+                                <button ng-click="set.jsonSure()" class="btn btn-default">校验并格式化JSON</button>
+                                <span class="help-block">注意:JSON源需要校验并格式化JSON成功后才能正确保存添加</span>
+                                <span ng-show="set.pageElement.jsonTestFail" class="help-block alert-danger">校验并格式化失败.</span>
+                                <span ng-show="set.pageElement.jsonTestSuccess"class="help-block alert-info">校验并格式化成功.</span>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="form-group">
+                        <div class="col-sm-9">
+                        </div>
+                        <div class="col-sm-3">
+                            <a href="" ng-click="dash.active = 4 && set.saveSetting(set.origin)">保存并返回配置数据</a>
+                        </div>
+                    </div>
+                </fieldset>
+
+            </form>
+
+        </div>
+    </div>
+</div>

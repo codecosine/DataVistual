@@ -1,0 +1,39 @@
+<div class="modal-body">
+    <div class="login">
+    <div class="logo"></div>
+    <form name='registerForm' ng-submit="auth.signUp(auth.register)">
+        <div class="form-group">
+            <input type="text" class="form-control" ng-model="auth.register.username"  ng-required="true" ng-minlength="5" ng-maxlength="10" ng-pattern="/^[a-zA-Z]{1}/" name="username" placeholder="填写用户名">
+            <p ng-show="registerForm.username.$error.minlength" class="tip-error">
+                * 用户名不能小于5位
+            </p>
+            <p ng-show="registerForm.username.$error.maxlength" class="tip-error">
+                * 用户名不能大于10位
+            </p>
+            <p ng-show="registerForm.username.$error.pattern" class="tip-error">
+                * 用户名必需以英文字母开头
+            </p>
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control"  ng-model="auth.register.password" ng-required="true" ng-minlength="5" ng-maxlength="12" name="password" placeholder="设置密码">
+            <p ng-show="registerForm.password.$error.minlength" class="tip-error">
+                * 密码不能小于5位
+            </p>
+            <p ng-show="registerForm.password.$error.maxlength" class="tip-error">
+                * 密码不能大于12位
+            </p>
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control"  ng-model="auth.register.passwordConfirm" ng-required="true" name="passwordConfirm" placeholder="再次输入密码">
+            <p ng-show="registerForm.password.$dirty && registerForm.passwordConfirm.$dirty && auth.register.password !== auth.register.passwordConfirm" class="tip-error">
+                * 密码和确认密码不一致</p>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-danger enter-responsive" ng-disabled="registerForm.username.$invalid || registerForm.password.$invalid || auth.register.password !== auth.register.passwordConfirm" >注册</button>
+        </div>
+        <div class="form-group text-center">
+            已有账户？<a href="#" ng-click="auth.changeToSignIn()" aria-controls="profile" role="tab" data-toggle="tab">点击登录</a>
+        </div>
+    </form>
+</div>
+</div>

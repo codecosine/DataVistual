@@ -1,0 +1,33 @@
+<div ng-controller="ChartsCreate as create" >
+    <div class="col-md-12">
+        <form class="form-horizontal">
+            <legend>图表创建</legend>
+            <div ng-show="create.step == 1">
+                <div class="list-group col-sm-2">
+                    <a href="" class="cos-list-item"   ng-repeat="chartbar in create.typeBar" ng-click="create.active = chartbar.index" ng-class="{'active': create.active == chartbar.index}" ng-bind="chartbar.name"></a>
+
+                </div>
+                <div class="col-sm-10">
+                    <a class="col-sm-6 chartlist-item" ng-repeat="chart in create.chartTypeArray" ng-show="chart.index==create.active" ng-click="create.step_2(chart.id)">
+                        <img class="col-sm-12" ng-src="{{chart.imageUrl}}">
+                        <div class="col-sm-12 des" ng-bind="chart.name"></div>
+                    </a>
+                </div>
+            </div>
+            <div ng-show="create.step == 2">
+                <div ng-include src="create.chartType.src"></div>
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <a href="" ng-click="create.step = 1">返回选择图表</a>
+                    </div>
+                    <div class="col-sm-3">
+                        <a href="" ng-click="create.createChart()">下一步生成图表</a>
+                    </div>
+                </div>
+            </div>
+
+
+        </form>
+
+    </div>
+</div>

@@ -3,14 +3,25 @@
  */
 module.exports = function(grunt){
 
+    // 项目配置信息
     grunt.initConfig({
-
+        concat : {
+            dist:{
+                src:['public/scripts/*.js','public/scripts/*/*.js'],
+                dest:'public/dist/built.js'
+            }
+        },
+        uglify:{
+            build:{
+                src:'public/dist/built.js',
+                dest:'public/dist/built.min.js'
+            }
+        }
     });
 
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-nodemon');
-    grunt.loadNpmTasks('grunt-concurrent');
+    // 加载插件
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
 
-    grunt.option('force',true);
-    grunt.registerTask('default',['concurrent']);
+    grunt.registerTask('default',['concat','uglify']);
 }

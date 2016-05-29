@@ -44,6 +44,34 @@ legend{
     font-size: 12px;
     font-weight: 700;
 }
+.des{
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    color: #3A4956;
+}
+.chartlist-item{
+    border: solid 1px #DCDCDC;
+    margin-bottom: 10px;
+    transition: color 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), border 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+}
+.cos-list-item.active, .cos-list-item.active:focus, .cos-list-item.active:hover {
+    z-index: 2;
+    color: #217346;
+    background-color: transparent;
+    border-left: 1px solid #217346;
+}
+.cos-list-item{
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: #fff;
+}
+a.cos-list-item, button.cos-list-item {
+    color: #555;
+}
 
 .main-menu{
     position: fixed;
@@ -94,10 +122,4 @@ legend{
 .main-menu .tab-panel{
     padding: 20px 30px;
 
-}
-.chartTypeList{
-    padding: 0 10px;
-}
-.chartTypeList button{
-    margin: 2px;
 }
